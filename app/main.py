@@ -1,6 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 
 app = FastAPI()
+
+@app.get("/api/ip")
+async def read_root(request: Request):
+    client_ip = request.client.host
+    return {"client_ip": client_ip}
 
 @app.get("/")
 def read_root():
